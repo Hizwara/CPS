@@ -9,10 +9,10 @@ dhtDevice = adafruit_dht.DHT22(board.D4)  # Using GPIO4 for DHT22
 # --- LED SETUP ---
 pixels = [
     neopixel.NeoPixel(board.D18, 30, brightness=0.8, auto_write=False),
+    neopixel.NeoPixel(board.D12, 30, brightness=0.8, auto_write=False),
+    neopixel.NeoPixel(board.D13, 30, brightness=0.8, auto_write=False),
     neopixel.NeoPixel(board.D21, 30, brightness=0.8, auto_write=False),
-    neopixel.NeoPixel(board.D22, 30, brightness=0.8, auto_write=False),
-    neopixel.NeoPixel(board.D23, 30, brightness=0.8, auto_write=False),
-    neopixel.NeoPixel(board.D24, 30, brightness=0.8, auto_write=False)
+    neopixel.NeoPixel(board.D19, 30, brightness=0.8, auto_write=False)
 ]
 
 # --- HELPER FUNCTIONS ---
