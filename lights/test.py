@@ -21,29 +21,36 @@ except Exception as e:
 BLUE = (0, 0, 255)
 OFF = (0, 0, 0)
 
-def turn_all_blue():
-    """Turn all terraces blue simultaneously."""
-    print("Turning on all LEDs to blue...")
-    for i, strip in enumerate(pixels):
-        print(f"Setting Level {i+1} to blue...")
-        strip.fill(BLUE)
-    print("All levels are now BLUE")
+def flowing_water():
+    """Simulate water flowing from top (Level 5) to bottom (Level 1) with accumulation."""
+    print("Starting water flow animation...")
+    
+    # Turn all LEDs off first
+    for strip in pixels:
+        strip.fill(OFF)
+    
+    # Flow from Level 5 down to Level 1 (water accumulates)
+    for i in range(4, -1, -1):  # Start from index 4 (Level 5) down to 0 (Level 1)
+        pixels[i].fill(BLUE)  # Turn on current level
+        print(f"Water reaches Level {i+1}")
+        time.sleep(1)  # Each level lights for 1 second
+    
+    print("Water flow complete - all levels filled!")
 
 def turn_all_off():
     """Turn off all LEDs on all levels."""
     print("Turning off all LEDs...")
     for i, strip in enumerate(pixels):
-        print(f"Turning off Level {i+1}...")
         strip.fill(OFF)
     print("All lights are now OFF")
 
 try:
-    turn_all_blue()
-    print("All lights are on. Press Ctrl+C to turn off.")
+    print("Water flow animation started. Press Ctrl+C to stop.")
     
-    # Keep lights on until interrupted
     while True:
-        time.sleep(1)
+        flowing_water()  # 5 seconds total (5 levels × 1 second each)
+        print("Waiting 3 seconds before next flow cycle...")
+        time.sleep(3)  # Wait 3 seconds before repeating
 
 except KeyboardInterrupt:
     print("\nReceived Ctrl+C, shutting down safely...")
