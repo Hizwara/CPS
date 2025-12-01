@@ -7,8 +7,8 @@ print("Initializing LED strips...")
 
 try:
     pixels = [
-        neopixel.NeoPixel(board.D18, 200, brightness=0.8, auto_write=True),  # Level 1
-        neopixel.NeoPixel(board.D12, 200, brightness=0.8, auto_write=True),  # Level 2
+        neopixel.NeoPixel(board.D18, 500, brightness=0.8, auto_write=True),  # Level 1 - Full strip
+        neopixel.NeoPixel(board.D12, 500, brightness=0.8, auto_write=True),  # Level 2 - Full strip
         neopixel.NeoPixel(board.D13, 100, brightness=0.8, auto_write=True),  # Level 3
         neopixel.NeoPixel(board.D19, 100, brightness=0.8, auto_write=True),  # Level 4
         neopixel.NeoPixel(board.D21, 100, brightness=0.8, auto_write=True)   # Level 5
