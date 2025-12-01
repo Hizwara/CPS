@@ -2,17 +2,16 @@ import time
 import board
 import neopixel
 
-# --- LED SETUP ---
 # 5 terraces (bottom → top)
 print("Initializing LED strips...")
 
 try:
     pixels = [
-        neopixel.NeoPixel(board.D18, 30, brightness=0.8, auto_write=True),  # Level 1
-        neopixel.NeoPixel(board.D12, 30, brightness=0.8, auto_write=True),  # Level 2
-        neopixel.NeoPixel(board.D13, 30, brightness=0.8, auto_write=True),  # Level 3
-        neopixel.NeoPixel(board.D19, 30, brightness=0.8, auto_write=True),  # Level 4
-        neopixel.NeoPixel(board.D21, 30, brightness=0.8, auto_write=True)   # Level 5
+        neopixel.NeoPixel(board.D18, 100, brightness=0.8, auto_write=True),  # Level 1
+        neopixel.NeoPixel(board.D12, 100, brightness=0.8, auto_write=True),  # Level 2
+        neopixel.NeoPixel(board.D13, 100, brightness=0.8, auto_write=True),  # Level 3
+        neopixel.NeoPixel(board.D19, 100, brightness=0.8, auto_write=True),  # Level 4
+        neopixel.NeoPixel(board.D21, 100, brightness=0.8, auto_write=True)   # Level 5
     ]
     print("LED strips initialized successfully!")
 except Exception as e:
