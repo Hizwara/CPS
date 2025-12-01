@@ -20,22 +20,29 @@ except Exception as e:
 
 BLUE = (0, 0, 255)
 OFF = (0, 0, 0)
+BRIGHT_BLUE = (0, 100, 255)  # Brighter blue for blinking effect
+
+def turn_all_blue():
+    """Turn all levels blue initially."""
+    print("Turning all levels blue...")
+    for strip in pixels:
+        strip.fill(BLUE)
+    print("All levels are blue!")
 
 def flowing_water():
-    """Simulate water flowing from top (Level 5) to bottom (Level 1) with accumulation."""
+    """Simulate water flowing with blinking effect while keeping all levels blue."""
     print("Starting water flow animation...")
     
-    # Turn all LEDs off first
-    for strip in pixels:
-        strip.fill(OFF)
-    
-    # Flow from Level 5 down to Level 1 (water accumulates)
+    # Flow from Level 5 down to Level 1 (blink each level)
     for i in range(4, -1, -1):  # Start from index 4 (Level 5) down to 0 (Level 1)
-        pixels[i].fill(BLUE)  # Turn on current level
-        print(f"Water reaches Level {i+1}")
-        time.sleep(1)  # Each level lights for 1 second
+        # Blink effect: bright blue then back to normal blue
+        pixels[i].fill(BRIGHT_BLUE)  # Flash brighter
+        print(f"Water flows through Level {i+1}")
+        time.sleep(0.3)  # Quick bright flash
+        pixels[i].fill(BLUE)  # Back to normal blue
+        time.sleep(0.7)  # Rest of the 1 second
     
-    print("Water flow complete - all levels filled!")
+    print("Water flow animation complete!")
 
 def turn_all_off():
     """Turn off all LEDs on all levels."""
@@ -45,6 +52,8 @@ def turn_all_off():
     print("All lights are now OFF")
 
 try:
+    # Initially turn all lights blue
+    turn_all_blue()
     print("Water flow animation started. Press Ctrl+C to stop.")
     
     while True:
