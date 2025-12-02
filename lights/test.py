@@ -20,7 +20,6 @@ except Exception as e:
 
 BLUE = (0, 0, 255)
 OFF = (0, 0, 0)
-BRIGHT_BLUE = (0, 100, 255)  # Brighter blue for blinking effect
 
 def turn_all_blue():
     """Turn all levels blue initially."""
@@ -30,17 +29,18 @@ def turn_all_blue():
     print("All levels are blue!")
 
 def flowing_water():
-    """Simulate water flowing with blinking effect while keeping all levels blue."""
+    """Simulate water flowing with beeping effect (OFF→ON) while keeping all levels blue."""
     print("Starting water flow animation...")
     
-    # Flow from Level 5 down to Level 1 (blink each level)
+    # Flow from Level 5 down to Level 1 (beep each level)
     for i in range(4, -1, -1):  # Start from index 4 (Level 5) down to 0 (Level 1)
-        # Blink effect: bright blue then back to normal blue
-        pixels[i].fill(BRIGHT_BLUE)  # Flash brighter
-        print(f"Water flows through Level {i+1}")
-        time.sleep(0.3)  # Quick bright flash
-        pixels[i].fill(BLUE)  # Back to normal blue
-        time.sleep(0.7)  # Rest of the 1 second
+        # Beeping effect: turn OFF then ON again
+        pixels[i].fill(OFF)  # Turn OFF
+        print(f"Level {i+1} beeps - OFF")
+        time.sleep(0.5)  # OFF for 0.5 seconds
+        pixels[i].fill(BLUE)  # Turn ON again
+        print(f"Level {i+1} beeps - ON")
+        time.sleep(0.5)  # ON for 0.5 seconds
     
     print("Water flow animation complete!")
 
