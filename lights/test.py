@@ -14,9 +14,6 @@ try:
         neopixel.NeoPixel(board.D21, 100, brightness=0.8, auto_write=True)   # Level 5
     ]
     print("LED strips initialized successfully!")
-except Exception as e:
-    print(f"Error initializing LED strips: {e}")
-    exit(1)
 
 BLUE = (0, 0, 255)
 OFF = (0, 0, 0)
