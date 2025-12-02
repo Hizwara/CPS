@@ -24,7 +24,7 @@ print("Testing LED pixels by level...")
 print("LEVEL 5:")
 pixels[4].fill(OFF)  # Turn off all first
 # Modify the pixel range below (start_pixel-1 to end_pixel-1 because of 0-indexing)
-for i in range(0, 10):  # Pixels 1-10
+for i in range(0, 5):  # Pixels 1-10
     pixels[4][i] = BLUE
 time.sleep(2)
 
@@ -32,7 +32,7 @@ time.sleep(2)
 print("LEVEL 4:")
 pixels[3].fill(OFF)  # Turn off all first
 # Modify the pixel range below
-for i in range(10, 20):  # Pixels 11-20
+for i in range(0, 0):  # Pixels 11-20
     pixels[3][i] = BLUE
 time.sleep(2)
 
@@ -40,7 +40,7 @@ time.sleep(2)
 print("LEVEL 3:")
 pixels[2].fill(OFF)  # Turn off all first
 # Modify the pixel range below
-for i in range(20, 30):  # Pixels 21-30
+for i in range(0, 0):  # Pixels 21-30
     pixels[2][i] = BLUE
 time.sleep(2)
 
@@ -48,7 +48,7 @@ time.sleep(2)
 print("LEVEL 2:")
 pixels[1].fill(OFF)  # Turn off all first
 # Modify the pixel range below
-for i in range(30, 40):  # Pixels 31-40
+for i in range(0, 0):  # Pixels 31-40
     pixels[1][i] = BLUE
 time.sleep(2)
 
@@ -56,7 +56,7 @@ time.sleep(2)
 print("LEVEL 1:")
 pixels[0].fill(OFF)  # Turn off all first
 # Modify the pixel range below
-for i in range(40, 50):  # Pixels 41-50
+for i in range(0, 0):  # Pixels 41-50
     pixels[0][i] = BLUE
 time.sleep(2)
 
