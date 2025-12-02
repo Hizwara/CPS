@@ -29,16 +29,21 @@ def turn_all_blue():
     print("All levels are blue!")
 
 def flowing_water():
-    """Simulate water flowing with beeping effect (OFF→ON) while keeping all levels blue."""
+    """Simulate water flowing with beeping effect while keeping other levels static blue."""
     print("Starting water flow animation...")
     
     # Flow from Level 5 down to Level 1 (beep each level)
     for i in range(4, -1, -1):  # Start from index 4 (Level 5) down to 0 (Level 1)
-        # Beeping effect: turn OFF then ON again
-        pixels[i].fill(OFF)  # Turn OFF
+        # Ensure all other levels stay blue before beeping current level
+        for j in range(5):
+            if j != i:  # Keep all other levels blue
+                pixels[j].fill(BLUE)
+        
+        # Beeping effect on current level only
+        pixels[i].fill(OFF)  # Turn OFF current level
         print(f"Level {i+1} beeps - OFF")
         time.sleep(0.5)  # OFF for 0.5 seconds
-        pixels[i].fill(BLUE)  # Turn ON again
+        pixels[i].fill(BLUE)  # Turn ON current level again
         print(f"Level {i+1} beeps - ON")
         time.sleep(0.5)  # ON for 0.5 seconds
     
