@@ -54,12 +54,10 @@ def turn_all_off():
 try:
     # Initially turn all lights blue
     turn_all_blue()
-    print("Water flow animation started. Press Ctrl+C to stop.")
+    print("Continuous water flow animation started. Press Ctrl+C to stop.")
     
     while True:
-        flowing_water()  # 5 seconds total (5 levels × 1 second each)
-        print("Waiting 3 seconds before next flow cycle...")
-        time.sleep(3)  # Wait 3 seconds before repeating
+        flowing_water()  # Continuous flow without delay
 
 except KeyboardInterrupt:
     print("\nReceived Ctrl+C, shutting down safely...")
