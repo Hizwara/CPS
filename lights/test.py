@@ -30,12 +30,13 @@ def turn_all_blue():
         strip.show()
     print("All LEDs are now blue!")
 
-def setup_level_ranges():
-    """Set up the pixel ranges for each level"""
-    # Turn off all LEDs first
-    for strip in pixels:
-        strip.fill(OFF)
-        strip.show()
+def keep_other_levels_blue(current_level, level_ranges):
+    """Keep all other levels blue while one level blinks"""
+    for i in range(5):
+        if i != current_level:  # Keep all other levels blue
+            for j in range(level_ranges[i][0], level_ranges[i][1]):
+                pixels[i][j] = BLUE
+            pixels[i].show()
 
 def blink_level(level_index, pixel_range, level_ranges):
     """Blink a specific level for 1 second while keeping others blue"""
