@@ -22,6 +22,14 @@ OFF = (0, 0, 0)
 BLUE = (0, 0, 255)
 BRIGHT_BLUE = (0, 100, 255)
 
+def turn_all_blue():
+    """Turn all LEDs to blue initially"""
+    print("Turning all LEDs to blue...")
+    for strip in pixels:
+        strip.fill(BLUE)
+        strip.show()
+    print("All LEDs are now blue!")
+
 def setup_level_ranges():
     """Set up the pixel ranges for each level"""
     # Turn off all LEDs first
@@ -62,8 +70,10 @@ def flowing_water_animation():
     for level in range(4, -1, -1):  # 4,3,2,1,0 (Level 5 down to Level 1)
         blink_level(level, level_ranges[level])
 
-# Initial setup
-setup_level_ranges()
+# Initial setup - Turn all LEDs to blue first
+turn_all_blue()
+time.sleep(2)  # Keep all blue for 2 seconds
+
 print("Starting continuous flowing water animation...")
 print("Press Ctrl+C to stop")
 
