@@ -25,6 +25,15 @@ LIGHT_BLUE = (173, 216, 230)  # 50-75%
 DARK_BLUE = (0, 0, 139)     # 75-100%
 RED = (255, 0, 0)           # Overflow >100%
 
+# Color name mapping for display
+COLOR_NAMES = {
+    (0, 0, 0): "OFF",
+    (255, 255, 0): "YELLOW",
+    (173, 216, 230): "LIGHT_BLUE", 
+    (0, 0, 139): "DARK_BLUE",
+    (255, 0, 0): "RED"
+}
+
 # Water system parameters (MODIFY THESE FOR DIFFERENT SCENARIOS)
 NORMAL_SPRING_RATE = 3.0    # Normal water input (L/s)
 HEAVY_RAIN_RATE = 10.0      # Heavy rain water input (L/s) - MODIFY THIS
@@ -59,6 +68,27 @@ def get_color_for_level(level_index):
         return DARK_BLUE
     else:
         return RED
+
+def get_color_name(color_tuple):
+    """Get color name from RGB tuple"""
+    return COLOR_NAMES.get(color_tuple, "UNKNOWN")
+
+def display_current_colors():
+    """Display current LED colors for all levels"""
+    print("\n--- Current LED Colors ---")
+    for i in range(5):
+        level_num = i + 1
+        current_color = get_color_for_level(i)
+        color_name = get_color_name(current_color)
+        water_pct = (current_water_levels[i] / water_capacities[i]) * 100
+        
+        # Add special status indicators
+        status_info = ""
+        if i == 3 and level_4_blocked:  # Level 4 blocked
+            status_info = " [BLOCKED]"
+        
+        print(f"Level {level_num}: {color_name} LED ({water_pct:.1f}%){status_info}")
+    print("-------------------------")
 
 def update_water_system():
     """Update water levels with blockage and heavy rain scenarios"""
@@ -158,6 +188,7 @@ def blink_blocked_level(level_index, pixel_range):
         pixels[level_index][i] = RED
     pixels[level_index].show()
     
+    print(f"Level {level_index + 1}: RED LED ON (blocked)")
     time.sleep(0.5)  # Red ON for 0.5 seconds
     
     # Turn OFF
@@ -165,6 +196,7 @@ def blink_blocked_level(level_index, pixel_range):
         pixels[level_index][i] = OFF
     pixels[level_index].show()
     
+    print(f"Level {level_index + 1}: LED OFF (blocked)")
     time.sleep(0.5)  # OFF for 0.5 seconds
 
 def keep_other_levels_colored(current_level, level_ranges):
@@ -172,13 +204,15 @@ def keep_other_levels_colored(current_level, level_ranges):
     for i in range(5):
         if i != current_level:  # Keep all other levels at capacity color
             color = get_color_for_level(i)
+            color_name = get_color_name(color)
             for j in range(level_ranges[i][0], level_ranges[i][1]):
                 pixels[i][j] = color
             pixels[i].show()
+            print(f"Level {i + 1}: {color_name} LED (steady)")
 
 def blink_level(level_index, pixel_range, level_ranges):
     """Blink a specific level with special handling for blocked Level 4"""
-    print(f"Blinking Level {level_index + 1}...")
+    print(f"\n--- Blinking Level {level_index + 1} ---")
     
     # Special red blinking for blocked Level 4
     if level_index == 3 and level_4_blocked:  # Level 4 is index 3
@@ -189,6 +223,7 @@ def blink_level(level_index, pixel_range, level_ranges):
     
     # Normal blinking for other levels
     level_color = get_color_for_level(level_index)
+    color_name = get_color_name(level_color)
     
     # Ensure all other levels show their capacity colors
     keep_other_levels_colored(level_index, level_ranges)
@@ -198,6 +233,7 @@ def blink_level(level_index, pixel_range, level_ranges):
         pixels[level_index][i] = OFF
     pixels[level_index].show()
     
+    print(f"Level {level_index + 1}: LED OFF (blinking)")
     time.sleep(0.5)  # OFF for 0.5 seconds
     
     # Turn ON the current level with capacity color
@@ -205,6 +241,7 @@ def blink_level(level_index, pixel_range, level_ranges):
         pixels[level_index][i] = level_color
     pixels[level_index].show()
     
+    print(f"Level {level_index + 1}: {color_name} LED ON (blinking)")
     time.sleep(0.5)  # ON for 0.5 seconds
 
 def flowing_water_animation():
@@ -227,6 +264,7 @@ def flowing_water_animation():
     
     if cycle_count % 5 == 0:
         display_water_status()
+        display_current_colors()
     
     # Blink from Level 5 down to Level 1
     for level in range(4, -1, -1):  # 4,3,2,1,0 (Level 5 down to Level 1)
@@ -251,6 +289,7 @@ for i in range(5):
 
 time.sleep(3)
 display_water_status()
+display_current_colors()
 
 print("\nStarting flood simulation...")
 print("Modify 'level_4_blocked' and 'heavy_rain_active' variables to trigger scenarios")
