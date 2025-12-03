@@ -37,23 +37,26 @@ def setup_level_ranges():
         strip.fill(OFF)
         strip.show()
 
-def blink_level(level_index, pixel_range):
-    """Blink a specific level for 1 second"""
+def blink_level(level_index, pixel_range, level_ranges):
+    """Blink a specific level for 1 second while keeping others blue"""
     print(f"Blinking Level {level_index + 1}...")
     
-    # Turn ON the level
-    for i in range(pixel_range[0], pixel_range[1]):
-        pixels[level_index][i] = BLUE
-    pixels[level_index].show()
+    # Ensure all other levels stay blue
+    keep_other_levels_blue(level_index, level_ranges)
     
-    time.sleep(0.5)  # ON for 0.5 seconds
-    
-    # Turn OFF the level
+    # Turn OFF the current level
     for i in range(pixel_range[0], pixel_range[1]):
         pixels[level_index][i] = OFF
     pixels[level_index].show()
     
     time.sleep(0.5)  # OFF for 0.5 seconds
+    
+    # Turn ON the current level (back to blue)
+    for i in range(pixel_range[0], pixel_range[1]):
+        pixels[level_index][i] = BLUE
+    pixels[level_index].show()
+    
+    time.sleep(0.5)  # ON for 0.5 seconds
 
 def flowing_water_animation():
     """Continuous flowing water animation from Level 5 to Level 1"""
@@ -68,7 +71,7 @@ def flowing_water_animation():
     
     # Blink from Level 5 down to Level 1
     for level in range(4, -1, -1):  # 4,3,2,1,0 (Level 5 down to Level 1)
-        blink_level(level, level_ranges[level])
+        blink_level(level, level_ranges[level], level_ranges)
 
 # Initial setup - Turn all LEDs to blue first
 turn_all_blue()
