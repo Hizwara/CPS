@@ -7,7 +7,7 @@ print("Initializing LED strips...")
 
 try:
     pixels = [
-        neopixel.NeoPixel(board.D18, 150, brightness=0.8, auto_write=False),  # Level 1 
+        neopixel.NeoPixel(board.D18, 200, brightness=0.8, auto_write=False),  # Level 1 
         neopixel.NeoPixel(board.D12, 150, brightness=0.8, auto_write=False),  # Level 2
         neopixel.NeoPixel(board.D13, 150, brightness=0.8, auto_write=False),  # Level 3
         neopixel.NeoPixel(board.D19, 100, brightness=0.8, auto_write=False),  # Level 4
@@ -67,7 +67,7 @@ def flowing_water_animation():
         [0, 0],   # Level 2: pixels 0-39
         [0, 100],   # Level 3: pixels 0-99
         [0, 0],   # Level 4: pixels 0-78
-        [0, 100]    # Level 5: pixels 0-49
+        [0, 200]    # Level 5: pixels 0-199
     ]
     
     # Blink from Level 5 down to Level 1
