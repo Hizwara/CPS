@@ -63,11 +63,11 @@ def flowing_water_animation():
     """Continuous flowing water animation from Level 5 to Level 1"""
     # Define pixel ranges for each level [start, end]
     level_ranges = [
-        [0, 60],   # Level 1: pixels 0-59
-        [0, 40],   # Level 2: pixels 0-39
-        [0, 30],   # Level 3: pixels 0-29
-        [0, 79],   # Level 4: pixels 0-78
-        [0, 50]    # Level 5: pixels 0-49
+        [0, 50],   # Level 1: pixels 0-59
+        [0, 0,   # Level 2: pixels 0-39
+        [0, 100],   # Level 3: pixels 0-29
+        [0, 0],   # Level 4: pixels 0-78
+        [0, 100]    # Level 5: pixels 0-49
     ]
     
     # Blink from Level 5 down to Level 1
