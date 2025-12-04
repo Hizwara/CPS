@@ -195,9 +195,9 @@ if __name__ == "__main__":
     strip_defs = [
         (18, 50),   # Level 1
         (12, 50),   # Level 2
-        (13, 50),   # Level 3
+        (13, 100),   # Level 3
         (19, 100),  # Level 4
-        (21, 50)    # Level 5
+        (21, 100)    # Level 5
     ]
 
     multi = PigpioMulti(pi, strip_defs, brightness=0.8)
@@ -217,15 +217,15 @@ if __name__ == "__main__":
         pixels[3][i] = BLUE
 
     # ===== LEVEL 3 =====
-    for i in range(0, 0):  # Pixels 0-0 (0, 0)
+    for i in range(0, 100):  # Pixels 0-0 (0, 0)
         pixels[2][i] = BLUE
 
     # ===== LEVEL 2 =====
-    for i in range(0, 0):  # Pixels 0-0 (0, 0)
+    for i in range(0, 100):  # Pixels 0-0 (0, 0)
         pixels[1][i] = BLUE
 
     # ===== LEVEL 1 =====
-    for i in range(0, 0):  # Pixels 0-0 (0, 0)
+    for i in range(0, 100):  # Pixels 0-0 (0, 0)
         pixels[0][i] = BLUE
 
     # keep script alive briefly so you can see results (adjust or remove as you want)
